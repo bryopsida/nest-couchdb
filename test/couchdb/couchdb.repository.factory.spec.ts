@@ -1,4 +1,5 @@
 import { ServerScope } from 'nano'
+import 'reflect-metadata';
 
 import {
   CouchDbConnectionFactory,

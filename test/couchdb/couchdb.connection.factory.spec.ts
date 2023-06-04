@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import { CouchDbConnectionFactory } from '../../src/couchdb/couchdb.connection.factory'
 import { config } from '../__stubs__'
 import { describe, it, expect } from '@jest/globals'
@@ -9,7 +10,7 @@ describe('#couchdb', () => {
         expect(typeof CouchDbConnectionFactory.create).toBe('function')
       })
       it('should throw an error if no config', async () => {
-        expect(CouchDbConnectionFactory.create(undefined)).rejects.toThrow()
+        expect(CouchDbConnectionFactory.create(undefined as any)).rejects.toThrow()
       })
       it('should throw an error if wrong config, 1', async () => {
         expect(CouchDbConnectionFactory.create({} as any)).rejects.toThrow()
