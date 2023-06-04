@@ -1,4 +1,4 @@
-import * as nano from 'nano';
+import nano from 'nano';
 
 import { CouchDbConnectionConfig } from './interfaces';
 

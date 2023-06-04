@@ -1,4 +1,3 @@
-import { oO } from '@zmotivat0r/o0';
 import { ServerScope } from 'nano';
 import { plainToClass } from 'class-transformer';
 import { Injectable, INestApplication } from '@nestjs/common';
@@ -56,7 +55,7 @@ describe('#module', () => {
         expect(service.repo).toBeDefined();
       });
       it('should return database info', async () => {
-        const [_, info] = await oO(service.test());
+        const info = await service.test();
         expect(info).toBeDefined();
         expect(info.db_name).toBe(dbName);
       });
@@ -77,7 +76,7 @@ describe('#module', () => {
           action: 'meow',
           isActive: true,
         });
-        const [_, inserted] = await oO(service.repo.insert(cat));
+        const inserted = await service.repo.insert(cat);
         expect(inserted.ok).toBe(true);
         expect(typeof inserted.id).toBe('string');
         expect(typeof inserted.rev).toBe('string');
@@ -85,10 +84,10 @@ describe('#module', () => {
       });
 
       it('should get document', async () => {
-        const [_, cat] = await oO(service.repo.get(insertedId));
+        const cat = await service.repo.get(insertedId);
         expect(cat._id).toBe(insertedId);
 
-        const [, list] = await oO(service.repo.list());
+        const list = await service.repo.list();
         console.log(list);
       });
     });
