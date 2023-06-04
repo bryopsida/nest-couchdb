@@ -21,4 +21,4 @@ module.exports = {
     '!**/__stubs__/**',
     '!**/__fixture__/**',
   ],
-};
+}

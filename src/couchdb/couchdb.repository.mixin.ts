@@ -1,20 +1,20 @@
-import { DocumentScope } from 'nano';
+import { DocumentScope } from 'nano'
 
-import { Repository } from './interfaces';
+import { Repository } from './interfaces'
 
 export function CouchDbRepositoryMixin<T>(
   driver: DocumentScope<T>,
-  entity: T,
+  entity: T
 ): Repository<T> {
   class CouchDbRepository {
-    public entity: T;
+    public entity: T
 
     constructor() {
-      this.entity = entity;
+      this.entity = entity
     }
   }
 
-  Object.assign(CouchDbRepository.prototype, driver);
+  Object.assign(CouchDbRepository.prototype, driver)
 
-  return CouchDbRepository as any;
+  return CouchDbRepository as any
 }

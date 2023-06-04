@@ -1,4 +1,6 @@
-import { ServerScope } from 'nano';
+import { ServerScope } from 'nano'
 
-export const deleteDb = async (connection: ServerScope, dbName: string): Promise<any> =>
-  connection.db.destroy(dbName);
+export const deleteDb = async (
+  connection: ServerScope,
+  dbName: string
+): Promise<any> => connection.db.destroy(dbName)

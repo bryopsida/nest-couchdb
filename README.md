@@ -23,11 +23,11 @@ $ npm i @scalio/nest-couchdb nano
 First, let's create an `Entity`:
 
 ```typescript
-import { Entity, CouchDbEntity } from '@scalio/nest-couchdb';
+import { Entity, CouchDbEntity } from '@scalio/nest-couchdb'
 
 @Entity('cats')
 export class Cat extends CouchDbEntity {
-  name: string;
+  name: string
 }
 ```
 
@@ -37,16 +37,16 @@ The `CouchDbEntity` is a base class which has some common properties:
 
 ```typescript
 class CouchDbEntity {
-  _id: string;
-  _rev: string;
+  _id: string
+  _rev: string
 }
 ```
 
 Then, we need to import `CouchDbModule` in our `ApplicationModule`:
 
 ```typescript
-import { Module } from '@nestjs/common';
-import { CouchDbModule } from '@scalio/nest-couchdb';
+import { Module } from '@nestjs/common'
+import { CouchDbModule } from '@scalio/nest-couchdb'
 
 @Module({
   imports: [
@@ -64,11 +64,11 @@ export class ApplicationModule {}
 In our `CatsModule` we need to initiate repository for our `Cat` entity:
 
 ```typescript
-import { Module } from '@nestjs/common';
-import { CouchDbModule } from '@scalio/nest-couchdb';
-import { CatsService } from './cats.service';
-import { CatsController } from './cats.controller';
-import { Cat } from './cat.entity';
+import { Module } from '@nestjs/common'
+import { CouchDbModule } from '@scalio/nest-couchdb'
+import { CatsService } from './cats.service'
+import { CatsController } from './cats.controller'
+import { Cat } from './cat.entity'
 
 @Module({
   imports: [CouchDbModule.forFeature([Cat])],

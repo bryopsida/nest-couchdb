@@ -1,8 +1,8 @@
-import { Module, DynamicModule } from '@nestjs/common';
+import { Module, DynamicModule } from '@nestjs/common'
 
-import { CouchDbConnectionConfig } from '../couchdb';
-import { CouchDbCoreModule } from './couchdb-core.module';
-import { createCouchDbProviders } from './providers';
+import { CouchDbConnectionConfig } from '../couchdb'
+import { CouchDbCoreModule } from './couchdb-core.module'
+import { createCouchDbProviders } from './providers'
 
 @Module({})
 export class CouchDbModule {
@@ -10,15 +10,15 @@ export class CouchDbModule {
     return {
       module: CouchDbModule,
       imports: [CouchDbCoreModule.forRoot(config)],
-    };
+    }
   }
 
   static forFeature(entities: Function[]): DynamicModule {
-    const providers = createCouchDbProviders(entities);
+    const providers = createCouchDbProviders(entities)
     return {
       module: CouchDbModule,
       providers,
       exports: providers,
-    };
+    }
   }
 }

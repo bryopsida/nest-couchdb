@@ -1,1 +1,1 @@
-export * from './couchdb.exception';
+export * from './couchdb.exception'

@@ -1,2 +1,2 @@
-export * from './module';
-export * from './couchdb';
+export * from './module'
+export * from './couchdb'

@@ -1,19 +1,19 @@
-import { Provider } from '@nestjs/common';
-import { ServerScope } from 'nano';
+import { Provider } from '@nestjs/common'
+import { ServerScope } from 'nano'
 
 import {
   CouchDbConnectionFactory,
   CouchDbRepositoryFactory,
   CouchDbConnectionConfig,
-} from '../couchdb';
+} from '../couchdb'
 import {
   getConnectionToken,
   getRepositoryFactoryToken,
   getRepositoryToken,
-} from './utils';
+} from './utils'
 
 export const createCouchDbConnectionProviders = (
-  config: CouchDbConnectionConfig,
+  config: CouchDbConnectionConfig
 ): Provider[] => [
   {
     provide: getConnectionToken(),
@@ -25,14 +25,16 @@ export const createCouchDbConnectionProviders = (
       CouchDbRepositoryFactory.create(connection, config),
     inject: [getConnectionToken()],
   },
-];
+]
 
-export const createCouchDbRepositoryProvider = (entity: Function): Provider => ({
+export const createCouchDbRepositoryProvider = (
+  entity: Function
+): Provider => ({
   provide: getRepositoryToken(entity),
   useFactory: async (repositoryFactory: CouchDbRepositoryFactory) =>
     repositoryFactory.create(entity),
   inject: [getRepositoryFactoryToken()],
-});
+})
 
 export const createCouchDbProviders = (entities: Function[]): Provider[] =>
-  entities.map(createCouchDbRepositoryProvider);
+  entities.map(createCouchDbRepositoryProvider)

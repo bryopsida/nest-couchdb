@@ -1,8 +1,8 @@
-import { Entity, CouchDbEntity } from '../../../src/couchdb';
+import { Entity, CouchDbEntity } from '../../../src/couchdb'
 
 @Entity('cats')
 export class Cat extends CouchDbEntity {
-  name: string;
-  action: string;
-  isActive: boolean;
+  name: string
+  action: string
+  isActive: boolean
 }

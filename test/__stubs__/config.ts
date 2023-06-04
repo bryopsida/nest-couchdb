@@ -3,4 +3,4 @@ export const config = {
   username: 'couchdb',
   userpass: 'password',
   requestDefaults: { jar: true },
-};
+}
