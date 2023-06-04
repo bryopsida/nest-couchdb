@@ -1,5 +1,6 @@
 import { CouchDbConnectionFactory } from '../../src/couchdb/couchdb.connection.factory'
 import { config } from '../__stubs__'
+import { describe, it, expect } from '@jest/globals'
 
 describe('#couchdb', () => {
   describe('#CouchDbConnectionFactory', () => {

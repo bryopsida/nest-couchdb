@@ -15,8 +15,9 @@
     "lint:fix": "eslint --ext .ts src/ --fix && prettier --write ."
   },
   "devDependencies": {
+    "@jest/globals": "^29.5.0",
     "@nestjs/testing": "9.x.x",
-    "@types/jest": "29.x.x",
+    "@types/jest": "^29.5.2",
     "@types/node": "18.x.x",
     "@typescript-eslint/eslint-plugin": "^5.15.0",
     "@typescript-eslint/parser": "^5.15.0",
@@ -35,5 +36,22 @@
     "@nestjs/platform-express": "9.4.2",
     "nano": "^10.1.2",
     "pouchdb": "^8.0.1"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "testTimeout": 240000,
+    "verbose": true,
+    "moduleNameMapper": {
+      "(.+)\\.js": "$1"
+    },
+    "extensionsToTreatAsEsm": [
+      ".ts"
+    ],
+    "transform": {
+      "\\.[jt]sx?$": [
+        "ts-jest"
+      ]
+    }
   }
 }

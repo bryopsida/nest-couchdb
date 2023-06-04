@@ -7,6 +7,7 @@ import {
 import { CouchDbException } from '../../src/couchdb/exceptions'
 import { config, Cat } from '../__stubs__'
 import { deleteDb } from '../helpers'
+import { describe, it, expect, beforeAll, afterAll } from '@jest/globals'
 
 describe('#couchdb', () => {
   describe('#CouchDbRepositoryFactory', () => {

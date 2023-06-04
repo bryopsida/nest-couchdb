@@ -11,6 +11,7 @@ import {
 } from '../../src/module'
 import { config, Cat } from '../__stubs__'
 import { deleteDb } from '../helpers'
+import { describe, it, expect, beforeAll, afterAll } from '@jest/globals'
 
 describe('#module', () => {
   describe('#CouchDb inject decorators', () => {
