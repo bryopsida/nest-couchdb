@@ -1,45 +1,39 @@
 {
-  "name": "@scalio/nest-couchdb",
+  "name": "@bryopsida/nest-couchdb",
   "description": "CouchDB module for Nest framework",
   "version": "0.1.0",
   "license": "MIT",
-  "private": true,
+  "private": false,
   "scripts": {
-    "prebuild": "yarn build:clean",
-    "build:clean": "cd dist && rm -rf `ls | grep -v \"LICENSE\\|package.json\\|README.md\"`",
-    "build": "npx tsc -b tsconfig.build.json",
-    "commit": "npx git-cz",
-    "lint": "npx tslint 'src/*.ts'",
-    "format": "npx pretty-quick --pattern 'src/**/*.ts'",
-    "test": "npx jest -c=jest.config.js test/ --verbose --runInBand"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn format --staged && yarn lint",
-      "commit-msg": "npx validate-commit-msg"
-    }
-  },
-  "config": {
-    "commitizen": {
-      "path": "node_modules/cz-conventional-changelog"
-    },
-    "validate-commit-msg": {
-      "types": "conventional-commit-types",
-      "helpMessage": "Use \"yarn commit\" instead"
-    }
+    "prepack": "npm run build",
+    "start:services": "docker-compose up -d",
+    "stop:services": "docker-compose down",
+    "build": "node_modules/typescript/bin/tsc --project ./",
+    "build:docs": "typedoc src/**/*.ts --exclude node_modules/@types/node/events.d.ts ",
+    "test": "jest --coverage --testPathPattern='test/.*\\.spec\\.ts'",
+    "lint": "eslint --ext .ts src/ && prettier --check .",
+    "lint:fix": "eslint --ext .ts src/ --fix && prettier --write ."
   },
   "devDependencies": {
     "@nestjs/testing": "9.x.x",
     "@types/jest": "29.x.x",
     "@types/node": "18.x.x",
+    "@typescript-eslint/eslint-plugin": "^5.15.0",
+    "@typescript-eslint/parser": "^5.15.0",
+    "eslint": "^8.30.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-config-standard": "^17.1.0",
     "jest": "29.x.x",
+    "prettier": "^2.8.8",
     "ts-jest": "29.x.x",
+    "typedoc": "^0.24.0",
     "typescript": "4.x.x"
   },
   "dependencies": {
     "@nestjs/common": "9.4.2",
     "@nestjs/core": "9.4.2",
     "@nestjs/platform-express": "9.4.2",
+    "nano": "^10.1.2",
     "pouchdb": "^8.0.1"
   }
 }

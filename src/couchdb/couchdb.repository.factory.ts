@@ -6,10 +6,13 @@ import { CouchDbRepositoryMixin } from './couchdb.repository.mixin';
 import { getEntityMetadata } from './couchdb.utils';
 
 export class CouchDbRepositoryFactory {
-  constructor(
-    private connection: nano.ServerScope,
-    private config: CouchDbConnectionConfig,
-  ) {}
+  private readonly connection: nano.ServerScope;
+  private readonly config: CouchDbConnectionConfig;
+
+  constructor(connection: nano.ServerScope, config: CouchDbConnectionConfig) {
+    this.config = config;
+    this.connection = connection;
+  }
 
   static create(
     connection: nano.ServerScope,
@@ -20,7 +23,7 @@ export class CouchDbRepositoryFactory {
 
   async create<T>(entity: T): Promise<Repository<T>> {
     const dbName = this.getDbName(entity);
-    const checked = await this.checkDatabase(dbName);
+    await this.checkDatabase(dbName);
     const driver = this.connection.use<T>(dbName);
 
     return new (CouchDbRepositoryMixin<T>(driver, entity))();
@@ -37,7 +40,7 @@ export class CouchDbRepositoryFactory {
 
   private async checkDatabase(dbName: string): Promise<boolean> {
     try {
-      const database = await this.connection.db.get(dbName);
+      await this.connection.db.get(dbName);
       return true;
     } catch (error) {
       if (this.config.sync) {
@@ -48,7 +51,7 @@ export class CouchDbRepositoryFactory {
   }
 
   private async createDatabase(dbName: string): Promise<boolean> {
-    const database = await this.connection.db.create(dbName);
+    await this.connection.db.create(dbName);
     return true;
   }
 }

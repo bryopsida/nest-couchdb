@@ -1,9 +1,8 @@
 import { oO } from '@zmotivat0r/o0';
 import { ServerScope } from 'nano';
 import { plainToClass } from 'class-transformer';
-import { Injectable } from '@nestjs/common';
+import { Injectable, INestApplication } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
-import { INestApplication } from '@nestjs/common';
 
 import { CouchDbConnectionFactory, Repository } from '../../src/couchdb';
 import { CouchDbModule, InjectConnection, InjectRepository } from '../../src/module';
