@@ -29,31 +29,17 @@
     }
   },
   "devDependencies": {
-    "@nestjs/testing": "6.x.x",
+    "@nestjs/testing": "9.x.x",
     "@types/jest": "29.x.x",
-    "@types/node": "12.x.x",
-    "commitizen": "4.x.x",
-    "coveralls": "3.x.x",
-    "husky": "8.x.x",
+    "@types/node": "18.x.x",
     "jest": "29.x.x",
     "ts-jest": "29.x.x",
-    "ts-node": "10.x.x",
-    "tslint": "6.x.x",
-    "tslint-config-prettier": "1.18.0",
-    "typescript": "4.x.x",
-    "validate-commit-msg": "2.14.0",
-    "cz-conventional-changelog": "3.x.x",
-    "prettier": "2.x.x",
-    "pretty-quick": "3.x.x"
+    "typescript": "4.x.x"
   },
   "dependencies": {
-    "@nestjs/common": "6.x.x",
-    "@nestjs/core": "6.x.x",
-    "@nestjs/platform-express": "6.x.x",
-    "@zmotivat0r/o0": "^1.0.2",
-    "class-transformer": "0.x.x",
-    "nano": "10.x.x",
-    "reflect-metadata": "0.1.13",
-    "rxjs": "6.x.x"
+    "@nestjs/common": "9.4.2",
+    "@nestjs/core": "9.4.2",
+    "@nestjs/platform-express": "9.4.2",
+    "pouchdb": "^8.0.1"
   }
 }
