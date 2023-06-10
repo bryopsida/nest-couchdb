@@ -1,16 +1,38 @@
-import 'reflect-metadata';
+import 'reflect-metadata'
 import { CouchDbConnectionFactory } from '../../src/couchdb/couchdb.connection.factory'
-import { config } from '../__stubs__'
-import { describe, it, expect } from '@jest/globals'
+import { getConfig } from '../__stubs__'
+import { beforeAll, afterAll, describe, it, expect } from '@jest/globals'
+import { StartedTestContainer, GenericContainer } from 'testcontainers'
 
 describe('#couchdb', () => {
+  let container: StartedTestContainer
+  let config: any
+  beforeAll(async () => {
+    container = await new GenericContainer('couchdb')
+      .withEnvironment({
+        COUCHDB_PASSWORD:
+          '-pbkdf2-847043acc65626c8eb98da6d78682fbc493a1787,f7b1a3e4b624f4f0bbfe87e96841eda0,10',
+        COUCHDB_SECRET: '0123456789abcdef0123456789abcdef',
+        COUCHDB_USER: 'couchdb',
+        NODENAME: 'couchdb-0.docker.com',
+      })
+      .withNetworkAliases('couchdb-0.docker.com')
+      .withExposedPorts(5984)
+      .start()
+    config = getConfig(`http://localhost:${container.getFirstMappedPort()}`)
+  })
+  afterAll(async () => {
+    await container.stop()
+  })
   describe('#CouchDbConnectionFactory', () => {
     describe('#create', () => {
       it('should be defined', () => {
         expect(typeof CouchDbConnectionFactory.create).toBe('function')
       })
       it('should throw an error if no config', async () => {
-        expect(CouchDbConnectionFactory.create(undefined as any)).rejects.toThrow()
+        expect(
+          CouchDbConnectionFactory.create(undefined as any)
+        ).rejects.toThrow()
       })
       it('should throw an error if wrong config, 1', async () => {
         expect(CouchDbConnectionFactory.create({} as any)).rejects.toThrow()

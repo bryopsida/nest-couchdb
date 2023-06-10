@@ -1,6 +1,11 @@
 import { ServerScope } from 'nano'
 
-export const deleteDb = async (
+export async function deleteDb(
   connection: ServerScope,
   dbName: string
-): Promise<any> => connection.db.destroy(dbName)
+): Promise<any> {
+  const databases = await connection.db.list()
+  if (databases.indexOf(dbName) !== -1) {
+    await connection.db.destroy(dbName)
+  }
+}

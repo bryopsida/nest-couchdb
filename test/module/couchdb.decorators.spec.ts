@@ -9,11 +9,30 @@ import {
   InjectConnection,
   InjectRepository,
 } from '../../src/module'
-import { config, Cat } from '../__stubs__'
+import { getConfig, Cat } from '../__stubs__'
 import { deleteDb } from '../helpers'
 import { describe, it, expect, beforeAll, afterAll } from '@jest/globals'
+import { GenericContainer, StartedTestContainer } from 'testcontainers'
 
 describe('#module', () => {
+  let container: StartedTestContainer
+
+  beforeAll(async () => {
+    container = await new GenericContainer('couchdb')
+      .withEnvironment({
+        COUCHDB_PASSWORD:
+          '-pbkdf2-847043acc65626c8eb98da6d78682fbc493a1787,f7b1a3e4b624f4f0bbfe87e96841eda0,10',
+        COUCHDB_SECRET: '0123456789abcdef0123456789abcdef',
+        COUCHDB_USER: 'couchdb',
+        NODENAME: 'couchdb-0.docker.com',
+      })
+      .withNetworkAliases('couchdb-0.docker.com')
+      .withExposedPorts(5984)
+      .start()
+  })
+  afterAll(async () => {
+    await container.stop()
+  })
   describe('#CouchDb inject decorators', () => {
     const dbName = 'cats'
     let connection: ServerScope
@@ -34,6 +53,9 @@ describe('#module', () => {
     }
 
     beforeAll(async () => {
+      const config = getConfig(
+        `http://localhost:${container.getFirstMappedPort()}`
+      )
       connection = await CouchDbConnectionFactory.create(config)
       await deleteDb(connection, dbName)
 

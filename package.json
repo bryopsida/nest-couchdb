@@ -16,6 +16,7 @@
   },
   "devDependencies": {
     "@jest/globals": "^29.5.0",
+    "@nestjs/platform-express": "^9.4.2",
     "@nestjs/testing": "9.x.x",
     "@types/jest": "^29.5.2",
     "@types/node": "18.x.x",
@@ -33,9 +34,9 @@
   "dependencies": {
     "@nestjs/common": "9.4.2",
     "@nestjs/core": "9.4.2",
-    "@nestjs/platform-express": "9.4.2",
     "nano": "^10.1.2",
-    "pouchdb": "^8.0.1"
+    "pouchdb": "^8.0.1",
+    "testcontainers": "^9.8.0"
   },
   "jest": {
     "preset": "ts-jest",

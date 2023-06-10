@@ -1,16 +1,36 @@
 import { ServerScope } from 'nano'
-import 'reflect-metadata';
+import 'reflect-metadata'
 
 import {
   CouchDbConnectionFactory,
   CouchDbRepositoryFactory,
 } from '../../src/couchdb'
 import { CouchDbException } from '../../src/couchdb/exceptions'
-import { config, Cat } from '../__stubs__'
+import { getConfig, Cat } from '../__stubs__'
 import { deleteDb } from '../helpers'
 import { describe, it, expect, beforeAll, afterAll } from '@jest/globals'
+import { StartedTestContainer, GenericContainer } from 'testcontainers'
 
 describe('#couchdb', () => {
+  let container: StartedTestContainer
+  let config: any
+  beforeAll(async () => {
+    container = await new GenericContainer('couchdb')
+      .withEnvironment({
+        COUCHDB_PASSWORD:
+          '-pbkdf2-847043acc65626c8eb98da6d78682fbc493a1787,f7b1a3e4b624f4f0bbfe87e96841eda0,10',
+        COUCHDB_SECRET: '0123456789abcdef0123456789abcdef',
+        COUCHDB_USER: 'couchdb',
+        NODENAME: 'couchdb-0.docker.com',
+      })
+      .withNetworkAliases('couchdb-0.docker.com')
+      .withExposedPorts(5984)
+      .start()
+    config = getConfig(`http://localhost:${container.getFirstMappedPort()}`)
+  })
+  afterAll(async () => {
+    await container.stop()
+  })
   describe('#CouchDbRepositoryFactory', () => {
     const dbName = 'cats'
     const dbName2 = 'invalid'
@@ -54,26 +74,27 @@ describe('#couchdb', () => {
 
     describe('#createDatabase', () => {
       it('should return true', async () => {
-        const [_, ok] = await (repoFactory as any).createDatabase(dbName)
+        const ok = await (repoFactory as any).createDatabase(dbName)
         expect(ok).toBe(true)
       })
     })
 
     describe('#checkDatabase', () => {
       it('it should return true', async () => {
-        const [_, ok] = await (repoFactory as any).checkDatabase(dbName)
+        const ok = await (repoFactory as any).checkDatabase(dbName)
         expect(ok).toBe(true)
       })
       it('should throw an error', async () => {
-        const [err] = await (repoFactory as any).checkDatabase(dbName2)
-        expect(err).toBeInstanceOf(Error)
+        expect(() => {
+          return (repoFactory as any).checkDatabase(dbName2)
+        }).rejects.toReturnWith(Error)
       })
       it('should create database', async () => {
         const repoFactory2 = CouchDbRepositoryFactory.create(connection, {
           ...config,
           sync: true,
         })
-        const [_, ok] = await (repoFactory2 as any).checkDatabase(dbName2)
+        const ok = await (repoFactory2 as any).checkDatabase(dbName2)
         expect(ok).toBe(true)
       })
     })

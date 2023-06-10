@@ -4,3 +4,11 @@ export const config = {
   userpass: 'password',
   requestDefaults: { jar: true },
 }
+export function getConfig(url: string): any {
+  return {
+    url,
+    username: 'couchdb',
+    userpass: 'password',
+    requestDefaults: { jar: true },
+  }
+}
