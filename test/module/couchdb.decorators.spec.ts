@@ -1,6 +1,6 @@
 import { ServerScope } from 'nano'
 import { plainToClass } from 'class-transformer'
-import { Injectable, INestApplication } from '@nestjs/common'
+import { Injectable, INestApplication, INestMicroservice } from '@nestjs/common'
 import { Test } from '@nestjs/testing'
 
 import { CouchDbConnectionFactory, Repository } from '../../src/couchdb'
@@ -36,7 +36,7 @@ describe('#module', () => {
   describe('#CouchDb inject decorators', () => {
     const dbName = 'cats'
     let connection: ServerScope
-    let app: INestApplication
+    let app: INestMicroservice
     let service: TestService
     let insertedId: string
 
@@ -67,7 +67,7 @@ describe('#module', () => {
         providers: [TestService],
       }).compile()
 
-      app = fixture.createNestApplication()
+      app = fixture.createNestMicroservice({})
       await app.init()
       service = app.get<TestService>(TestService)
     })

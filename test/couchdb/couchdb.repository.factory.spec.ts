@@ -87,7 +87,7 @@ describe('#couchdb', () => {
       it('should throw an error', async () => {
         expect(() => {
           return (repoFactory as any).checkDatabase(dbName2)
-        }).rejects.toReturnWith(Error)
+        }).rejects.toBeInstanceOf(Error)
       })
       it('should create database', async () => {
         const repoFactory2 = CouchDbRepositoryFactory.create(connection, {

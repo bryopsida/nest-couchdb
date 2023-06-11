@@ -1,6 +1,6 @@
 import { ServerScope } from 'nano'
 import { Test } from '@nestjs/testing'
-import { INestApplication } from '@nestjs/common'
+import { INestApplication, INestMicroservice } from '@nestjs/common'
 
 import { CouchDbConnectionFactory } from '../../src/couchdb'
 import {
@@ -35,7 +35,7 @@ describe('#module', () => {
   describe('#CouchDbModule', () => {
     const dbName = 'cats'
     let connection: ServerScope
-    let app: INestApplication
+    let app: INestMicroservice
 
     beforeAll(async () => {
       const config = getConfig(
@@ -51,7 +51,7 @@ describe('#module', () => {
         ],
       }).compile()
 
-      app = fixture.createNestApplication()
+      app = fixture.createNestMicroservice({})
       await app.init()
     })
 
