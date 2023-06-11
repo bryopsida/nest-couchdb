@@ -36,8 +36,7 @@
   "dependencies": {
     "@nestjs/common": "9.4.2",
     "@nestjs/core": "9.4.2",
-    "nano": "^10.1.2",
-    "pouchdb": "^8.0.1"
+    "nano": "^10.1.2"
   },
   "jest": {
     "preset": "ts-jest",
