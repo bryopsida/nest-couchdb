@@ -9,7 +9,7 @@
     "start:services": "docker-compose up -d",
     "stop:services": "docker-compose down",
     "build": "node_modules/typescript/bin/tsc --project ./",
-    "build:docs": "npx @compodoc/compodoc -p tsconfig.json  -d ./docs",
+    "build:docs": "npx @compodoc/compodoc -p tsconfig.json",
     "test": "jest --coverage --testPathPattern='test/.*\\.spec\\.ts'",
     "lint": "eslint --ext .ts src/ && prettier --check .",
     "lint:fix": "eslint --ext .ts src/ --fix && prettier --write ."
