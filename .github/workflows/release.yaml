@@ -1,0 +1,11 @@
+name: Release
+on:
+  release:
+    types: [published]
+
+jobs:
+  node-release:
+    name: Release
+    uses: curium-rocks/flows/.github/workflows/node-ts-release.yml@main
+    secrets:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
