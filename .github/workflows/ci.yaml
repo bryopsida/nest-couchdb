@@ -7,8 +7,14 @@ on:
 
 jobs:
   node-test:
-    name: Test & QA
-    uses: curium-rocks/flows/.github/workflows/npm-lint-and-validate.yml@main
+    permissions:
+      contents: read
+      actions: read
+      security-events: write
+    name: 'Validate'
+    uses: curium-rocks/flows/.github/workflows/node-ts.yml@main
+    secrets:
+      SONARQUBE_KEY: ${{ secrets.SONARQUBE_KEY }}
   node-docs:
     needs:
       - node-test
