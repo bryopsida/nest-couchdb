@@ -7,6 +7,10 @@ on:
 
 jobs:
   node-test:
+    permissions:
+      contents: read
+      actions: read
+      security-events: write
     name: 'Validate'
     uses: curium-rocks/flows/.github/workflows/node-ts.yml@main
     secrets:
