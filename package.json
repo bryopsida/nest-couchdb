@@ -1,7 +1,7 @@
 {
   "name": "@bryopsida/nest-couchdb",
   "description": "CouchDB module for Nest framework",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "license": "MIT",
   "private": false,
   "main": "dist/index.js",
@@ -10,6 +10,10 @@
     "nest",
     "couchdb"
   ],
+  "bugs": {
+    "url": "https://github.com/bryopsida/nest-couchdb/issues"
+  },
+  "homepage": "https://github.com/bryopsida/nest-couchdb#readme",
   "scripts": {
     "prepack": "npm run build",
     "start:services": "docker-compose up -d",
