@@ -41,7 +41,7 @@
     "prettier": "^2.8.8",
     "testcontainers": "^10.0.0",
     "ts-jest": "29.x.x",
-    "typescript": "4.x.x"
+    "typescript": "5.x"
   },
   "dependencies": {
     "@nestjs/common": "10.3.5",
