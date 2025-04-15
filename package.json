@@ -44,7 +44,7 @@
     "typescript": "5.x"
   },
   "dependencies": {
-    "@nestjs/common": "11.0.1",
+    "@nestjs/common": "11.0.16",
     "@nestjs/core": "11.0.1",
     "nano": "^10.1.2"
   },
